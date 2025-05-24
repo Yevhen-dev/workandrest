@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/allShifts.css}">
+    <title>All shifts</title>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__back">
+                <a th:href="@{/adminDashboard}"><- Dashboard</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="main__shifts-table">
+            <h1 class="main__title">All Shifts</h1>
+
+            <div class="table__wrapper">
+                <table class="shifts__table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Total Time</th>
+                        <th>Change</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="shift : ${allShifts}">
+                        <td th:text="${shift.user.username}"></td>
+                        <td th:text="${shift.getFormattedStartTime()}"></td>
+                        <td th:text="${shift.getFormattedEndTime()}"></td>
+                        <td th:text="${shift.getFormattedDuration()}"></td>
+                        <td>
+                            <form th:action="@{/editShift}" method="get">
+                                <input type="hidden" name="id" th:value="${shift.id}"/>
+                                <button class="edit__btn" type="submit">Edit</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+</body>
+</html>

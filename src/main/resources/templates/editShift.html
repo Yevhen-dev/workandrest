@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/editShift.css}">
+    <title>Edit shift</title>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__back">
+                <a th:href="@{/adminDashboard}"><- Dashboard</a>
+            </div>
+        </nav>
+    </header>
+
+  <main class="main">
+    <div class="main__edit-form">
+      <h1>Edit Shift</h1>
+
+      <form class="edit__form" th:action="@{/updateShift}" method="post">
+        <input type="hidden" th:name="id" th:value="${shift.id}" />
+
+        <label for="startTime">Start Time:</label>
+        <input type="datetime-local" name="startTime" id="startTime"
+               th:value="${shift.getFormattedStartTime()}" required />
+
+        <label for="endTime">End Time:</label>
+        <input type="datetime-local" name="endTime" id="endTime"
+               th:value="${shift.getFormattedEndTime()}" required />
+
+        <button class="btn-save" type="submit">Save</button>
+      </form>
+    </div>
+  </main>
+</div>
+
+
+</body>
+</html>
+
+
+

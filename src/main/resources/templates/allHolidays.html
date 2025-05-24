@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/allHolidays.css}">
+    <title>All holiday</title>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__back">
+                <a th:href="@{/adminDashboard}"><- Dashboard</a>
+            </div>
+        </nav>
+    </header>
+
+
+    <main class="main">
+        <h2 class="main__title">Holiday Requests</h2>
+
+        <div class="table__wrapper">
+            <table class="holiday__table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="holiday : ${holidays}">
+                    <td th:text="${holiday.getUserEmail()}"></td>
+                    <td th:text="${holiday.startDate}"></td>
+                    <td th:text="${holiday.endDate}"></td>
+                    <td th:text="${holiday.getStatus()}"></td>
+                    <td>
+                        <form action="/allHolidays/updateStatus" method="post" class="action__form">
+                            <input type="hidden" name="id" th:value="${holiday.id}">
+                            <button type="submit" name="status" value="APPROVED" class="btn btn--approve">✅ Approve</button>
+                            <button type="submit" name="status" value="REJECTED" class="btn btn--reject">❌ Reject</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/adminDashboard.css}">
+    <title>Admin dashboard</title>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__greeting">
+                <h1>Hello, <span class="nav__greeting--name" th:text="${user.getUsername()}"></span></h1>
+            </div>
+
+
+            <div class="nav__greeting__logout">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">
+                        <svg class="nav__greeting__logout--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M16 17v-2h-4v-2h4v-2l4 3-4 3zm-2-13a2 2 0 0 1 2 2v4h-2V6H6v12h8v-2h2v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8z"/>
+                        </svg>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="user__panel">
+
+            <div class="user__panel__new-employee">
+                <form action="/addUser" method="get">
+                    <input type="submit" value="Add new employee">
+                </form>
+
+                <div class="user__panel__new-employee--employees">
+
+                    <ul id="usersList" class="user__panel__new-employee--exist">
+                        <li th:each="employee : ${users}" class="user__panel__new-employee--item">
+                            <span th:text="${employee.username}"></span>
+                        </li>
+                    </ul>
+
+                    <div class="pagination-controls">
+                        <button id="prevPage">Previous</button>
+                        <span id="pageInfo"></span>
+                        <button id="nextPage">Next</button>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="user__panel__work">
+
+                <div th:if="${!activeShift}" class="user__panel__work--start">
+                    <form action="/userDashboard/start" method="post">
+                        <input type="submit" value="Start shift">
+                    </form>
+                </div>
+
+                <div th:if="${activeShift}" class="user__panel__work__end">
+                    <form action="/userDashboard/end" method="post">
+                        <input type="submit" value="End shift">
+                    </form>
+                </div>
+
+                <div class="user__panel__work__duration">
+                    <h3>My Work History</h3>
+
+                    <table class="user__panel__work__duration__table" id="shiftsTable">
+                        <thead>
+                        <tr class="user__panel__work__duration__table--header">
+                            <th class="user__panel__work__duration__table--start">Start Time</th>
+                            <th class="user__panel__work__duration__table--end">End Time</th>
+                            <th class="user__panel__work__duration__table--total">Total Time</th>
+                        </tr>
+                        </thead>
+                        <tbody id="shiftsTableBody">
+                        <tr class="user__panel__work__duration__table--main" th:each="shift : ${shifts}">
+                            <td class="user__panel__work__duration__table--start" th:text="${shift.getFormattedStartTime()}"></td>
+                            <td class="user__panel__work__duration__table--end" th:text="${shift.getFormattedEndTime()}"></td>
+                            <td class="user__panel__work__duration__table--total" th:text="${shift.getFormattedDuration()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="pagination-controls">
+                        <button onclick="prevShiftsPage()" id="prevBtn">Previous</button>
+                        <span class="page-info" id="shiftsPageInfo">Page 1</span>
+                        <button onclick="nextShiftsPage()" id="nextBtn">Next</button>
+                    </div>
+
+
+                    <div class="user__panel__work__duration__shifts">
+                        <a class="user__panel__work__duration__shifts--view-all" href="/allShifts">View all shifts</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="user__panel__holiday">
+                <a class="user__panel__holiday--book" href="/holiday">Book a holiday</a>
+                <a class="user__panel__holiday--view-all" href="/allHolidays">All holidays</a>
+            </div>
+
+            <div class="user__panel__order">
+                <a class="user__panel__order--menu" href="/menu">Make an order</a>
+                <a class="user__panel__order--view-all" href="/allOrders">All orders</a>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    const itemsPerPage = 3;
+    let currentPage = 1;
+
+    const userList = document.querySelector("#usersList");
+    const users = userList.querySelectorAll("li");
+    const totalPages = Math.ceil(users.length / itemsPerPage);
+
+    const prevBtn = document.getElementById("prevPage");
+    const nextBtn = document.getElementById("nextPage");
+    const pageInfo = document.getElementById("pageInfo");
+
+    function showPage(page) {
+        users.forEach((user, index) => {
+            user.style.display = (index >= (page - 1) * itemsPerPage && index < page * itemsPerPage)
+                ? "list-item"
+                : "none";
+        });
+
+        pageInfo.textContent = `Page ${page} of ${totalPages}`;
+        prevBtn.disabled = page === 1;
+        nextBtn.disabled = page === totalPages;
+    }
+
+    prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    });
+
+    nextBtn.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    });
+
+
+    showPage(currentPage);
+
+
+    const rowsPerPage = 3;
+    let currentShiftsPage = 1;
+
+    const table = document.getElementById("shiftsTableBody");
+    const rows = Array.from(table.querySelectorAll("tr"));
+    const totalShiftsPages = Math.ceil(rows.length / rowsPerPage);
+
+    function showShiftsPage(page) {
+        currentShiftsPage = page;
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        rows.forEach((row, index) => {
+            row.style.display = (index >= start && index < end) ? "" : "none";
+        });
+
+        document.getElementById("pageInfo").textContent = `Page ${currentShiftsPage}`;
+        document.getElementById("prevBtn").disabled = currentShiftsPage === 1;
+        document.getElementById("nextBtn").disabled = currentShiftsPage === totalShiftsPages;
+    }
+
+    function prevShiftsPage() {
+        if (currentShiftsPage > 1) showShiftsPage(currentShiftsPage - 1);
+    }
+
+    function nextShiftsPage() {
+        if (currentShiftsPage < totalShiftsPages) showShiftsPage(currentShiftsPage + 1);
+    }
+
+    // Инициализация при загрузке
+    document.addEventListener("DOMContentLoaded", () => {
+        showShiftsPage(currentShiftsPage);
+    });
+
+</script>
+
+
+</body>
+</html>

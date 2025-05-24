@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/confirmOrder.css}">
+    <title>Confirm Order</title>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__back">
+                <a th:href="@{/menu}"><- Menu</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="main__order-summary" th:with="lastOrder=${orders[orders.size() - 1]}">
+            <h1 class="main__order-summary--title">
+                Order №<span th:text="${lastOrder.id}"></span>
+            </h1>
+
+            <p class="main__order-summary--info">
+                <strong>Date and time:</strong>
+                <span th:text="${#temporals.format(lastOrder.createdAt, 'dd.MM.yyyy HH:mm')}"></span>
+            </p>
+
+            <p class="main__order-summary--info">
+                <strong>Sent by:</strong>
+                <span th:text="${user.getUsername()}"></span>
+            </p>
+
+            <ul class="main__order-summary--list">
+                <li th:each="item : ${lastOrder.items}" class="main__order-summary--item">
+                    <span th:text="${item.getMenuItem().getName()}"></span> —
+                    <span th:text="${item.getQuantity()}"></span>
+                </li>
+            </ul>
+
+            <hr class="main__order-summary--divider"/>
+
+            <div class="main__order-summary--actions">
+                <a href="/menu" class="btn btn--primary">Send Order & Return to Menu</a>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+</body>
+</html>

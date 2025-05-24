@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/menu.css}">
+    <title>Menu</title>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__back" th:if="${user.getRole() == 'ROLE_ADMIN'}">
+                <a th:href="@{/adminDashboard}"><- Dashboard</a>
+
+            </div>
+            <div class="nav__back" th:unless="${user.getRole() == 'ROLE_ADMIN'}">
+                <a th:href="@{/userDashboard}"><- Dashboard</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="main__menu">
+            <h1 class="main__menu--title">Menu</h1>
+
+            <form action="/send" method="post" class="menu__form">
+                <div class="menu__items" th:each="item : ${menuItems}">
+                    <label class="menu__item">
+                        <input type="checkbox" name="menuItemIds" th:value="${item.id}" />
+                        <span class="menu__item--info" th:text="${item.name} + ' - ' + ${item.getDescription()} + ' - ' + ${item.price} + ' $'"></span>
+                        <input class="menu__item--qty" type="number" th:name="'quantities[' + ${item.id} + ']'" value="0" min="0" />
+                    </label>
+                </div>
+                <button type="submit" class="btn">Send order</button>
+            </form>
+        </div>
+    </main>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/addUser.css}">
+    <title>Add employee</title>
+</head>
+<body>
+
+<div class="container">
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__back">
+                <a th:href="@{/adminDashboard}"><- Dashboard</a>
+            </div>
+
+            <div class="nav__greeting__logout">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">
+                        <svg class="nav__greeting__logout--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M16 17v-2h-4v-2h4v-2l4 3-4 3zm-2-13a2 2 0 0 1 2 2v4h-2V6H6v12h8v-2h2v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8z"/>
+                        </svg>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+
+  <main class="main">
+    <div class="card">
+      <h1 class="card__title">Create New Employee</h1>
+      <form class="form" action="/addUser" method="post">
+        <div class="form__group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form__group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form__group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+
+        <div class="form__btn">
+          <input type="submit" value="Create Employee">
+        </div>
+      </form>
+    </div>
+  </main>
+
+
+</div>
+
+
+</body>
+</html>

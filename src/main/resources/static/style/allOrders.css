@@ -1,0 +1,110 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 10px;
+    background: linear-gradient(0deg, rgba(110,221,255,1) 0%, rgba(0,129,255,1) 100%);
+    color: #2d3436;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.nav__back a {
+    background: #00b894;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.nav__back a:hover {
+    background: #019875;
+}
+
+.main__title {
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.table__wrapper {
+    overflow-x: auto;
+}
+
+.orders__table {
+    width: 100%;
+    font-size: 1rem;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.orders__table thead {
+    background-color: #0984e3;
+    color: white;
+    text-transform: uppercase;
+}
+
+.orders__table th,
+.orders__table td {
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid #f1f1f1;
+    vertical-align: middle;
+}
+
+.orders__table td ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.orders__table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+@media (max-width: 790px) {
+    .orders__table {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .main__title {
+        font-size: 1.5rem;
+    }
+
+    .orders__table th,
+    .orders__table td {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .nav__back {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+}

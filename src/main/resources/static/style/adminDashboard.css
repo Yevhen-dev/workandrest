@@ -1,0 +1,226 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 10px;
+    background: linear-gradient(0deg, rgba(110,221,255,1) 0%, rgba(0,129,255,1) 100%);
+    color: #2d3436;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.nav__greeting h1 {
+    font-size: 1.8rem;
+}
+
+.nav__greeting--name {
+    color: #0984e3;
+    font-weight: bold;
+}
+
+.nav__greeting__logout button {
+    background: #d63031;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.nav__greeting__logout button:hover {
+    background: #c0392b;
+}
+
+.nav__greeting__logout--icon {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+.user__panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.user__panel > div {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.user__panel__new-employee--exist {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.user__panel__new-employee--item {
+    background: white;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.user__panel__new-employee--item:hover {
+    background: #f0f8ff;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto;
+    font-family: inherit;
+}
+
+.pagination-controls button {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 6px 14px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+.pagination-controls button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.pagination-controls .page-info {
+    padding: 6px 10px;
+    font-weight: 500;
+}
+
+input[type="submit"],
+a {
+    display: inline-block;
+    background-color: #00b894;
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+a:hover {
+    background-color: #019875;
+}
+
+.user__panel__work__end input {
+    background: #d63031;
+}
+
+.user__panel__work__end input:hover {
+    background: #c0392b;
+}
+
+.user__panel__work__duration {
+    margin-top: 15px;
+}
+.user__panel__work__duration h3 {
+    font-size: 1.1rem;
+}
+
+.user__panel__work__duration__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+.user__panel__work__duration__table th,
+.user__panel__work__duration__table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #dfe6e9;
+}
+
+.user__panel__work__duration__table--header {
+    background-color: #dff9fb;
+}
+
+.user__panel__work__duration__shifts {
+    margin-top: 15px;
+}
+
+.user__panel__holiday a,
+.user__panel__order a {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #6c5ce7;
+}
+
+.user__panel__order a {
+    background-color: #e17055;
+}
+
+.user__panel__holiday a:hover {
+    background-color: #574b90;
+}
+
+.user__panel__order a:hover {
+    background-color: #d35400;
+}
+
+@media (max-width: 992px) {
+    .user__panel {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 576px) {
+    .nav__greeting h1 {
+        font-size: 1.5rem;
+    }
+
+    input[type="submit"],
+    a {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}

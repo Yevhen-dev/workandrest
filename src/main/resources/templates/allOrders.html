@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/allOrders.css}">
+    <title>All orders</title>
+</head>
+<body>
+
+
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__back">
+                <a th:href="@{/adminDashboard}"><- Dashboard</a>
+            </div>
+        </nav>
+    </header>
+
+  <main class="main">
+    <div class="main__orders-table">
+      <h1 class="main__title">Orders</h1>
+
+      <div class="table__wrapper">
+        <table class="orders__table">
+          <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Name</th>
+            <th>Created At</th>
+            <th>Items</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.user.getUsername()}"></td>
+            <td th:text="${#temporals.format(order.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+              <ul>
+                <li th:each="item : ${order.items}"
+                    th:text="${item.menuItem.name} + ' x ' + ${item.quantity}"></li>
+              </ul>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+
+</body>
+</html>

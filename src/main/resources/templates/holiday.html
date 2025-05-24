@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/holiday.css}">
+    <title>Holiday request</title>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__back" th:if="${user.getRole() == 'ROLE_ADMIN'}">
+                <a th:href="@{/adminDashboard}"><- Dashboard</a>
+
+            </div>
+            <div class="nav__back" th:unless="${user.getRole() == 'ROLE_ADMIN'}">
+                <a th:href="@{/userDashboard}"><- Dashboard</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="main__holiday--table">
+            <h1>Your Holidays</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="holiday : ${holidays}">
+                    <td th:text="${holiday.getStartDate()}"></td>
+                    <td th:text="${holiday.getEndDate()}"></td>
+                    <td>
+                        <span th:text="${holiday.getStatus()}" th:classappend="'status--' + ${holiday.getStatus().toString().toLowerCase()}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="main__holiday--request">
+            <h2>Request a Holiday</h2>
+            <form class="holiday__form" action="/holiday/request" method="post">
+                <label for="startDate">Start Date:</label>
+                <input id="startDate" type="date" name="startDate"  required />
+
+                <label for="endDate">End Date:</label>
+                <input id="endDate" type="date" name="endDate" required />
+
+                <button class="btn-request" type="submit">Request</button>
+            </form>
+        </div>
+    </main>
+</div>
+
+<script>
+    let today = new Date();
+    let nextDay = new Date();
+    nextDay.setDate(nextDay.getDate() + 1);
+
+    let dayT = String(today.getDate()).padStart(2, '0');
+    let monthT = String(today.getMonth() + 1).padStart(2, '0');
+    let yearT = today.getFullYear();
+
+    let dayN = String(nextDay.getDate()).padStart(2, '0');
+    let monthN = String(nextDay.getMonth() + 1).padStart(2, '0');
+    let yearN = nextDay.getFullYear();
+
+    today = yearT + '-' + monthT + '-' + dayT;
+
+    nextDay = yearN + '-' + monthN + '-' + dayN;
+
+    document.getElementById("startDate").setAttribute("min", today);
+    document.getElementById("endDate").setAttribute("min", nextDay);
+</script>
+
+
+</body>
+</html>
