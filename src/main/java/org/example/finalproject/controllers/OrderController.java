@@ -71,7 +71,7 @@ public class OrderController {
         List<Order> orders = orderService.getOrdersByUser(user);
         model.addAttribute("user", user);
         model.addAttribute("orders", orders);
-        return "/confirmOrder";
+        return "confirmOrder";
     }
 
     @GetMapping("/allOrders")
