@@ -79,7 +79,7 @@ public class OrderController {
         List<Order> orders = orderService.getAllOrders();
         orders.sort(Comparator.comparing(Order::getCreatedAt).reversed());
         model.addAttribute("orders", orders);
-        return "/allOrders";
+        return "allOrders";
     }
 
 

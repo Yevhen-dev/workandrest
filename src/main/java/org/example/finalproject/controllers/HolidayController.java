@@ -46,7 +46,7 @@ public class HolidayController {
     public String allHolidaysPage(Model model) {
         List<HolidayRequest> holidayRequestList = holidayRequestRepository.findAll();
         model.addAttribute("holidays", holidayRequestList);
-        return "/allHolidays";
+        return "allHolidays";
     }
 
     @PostMapping( "/allHolidays/updateStatus" )
