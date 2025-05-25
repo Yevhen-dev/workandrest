@@ -24,6 +24,7 @@ public class DataBaseConfig implements WebMvcConfigurer {
 //                userService.registerUser("trial", "1234", "trial@gmail.com", "ROLE_USER");
 //                userService.registerUser("Me", "1234", "springtrialmail@gmail.com", "ROLE_USER");
 //
+                menuItemRepository.deleteAll();
                 MenuItem str = new MenuItem("Strawberry danish", "pastry with strawberry jam", 5.3);
                 MenuItem drinks  = new MenuItem("Drink", "Cola, Fanta, Sprite", 3.2);
                 MenuItem coffee = new MenuItem("Coffee", "coffee with milk", 4.0);
