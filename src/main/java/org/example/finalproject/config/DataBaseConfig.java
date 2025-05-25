@@ -20,16 +20,17 @@ public class DataBaseConfig implements WebMvcConfigurer {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-//                userService.registerUser("admin", "1234", "admin@gmail.com", "ROLE_ADMIN");
+                userService.registerUser("admin", "1234", "admin@gmail.com", "ROLE_ADMIN");
+                userService.registerUser("trial", "1234", "trial@gmail.com", "ROLE_USER");
 //                userService.registerUser("Me", "1234", "springtrialmail@gmail.com", "ROLE_USER");
 //
-//                MenuItem str = new MenuItem("Strawberry danish", "pastry with strawberry jam", 5.3);
-//                MenuItem drinks  = new MenuItem("Drink", "Cola, Fanta, Srite", 3.2);
-//                MenuItem coffee = new MenuItem("Coffee", "coffee with milk", 4.0);
-//
-//                menuItemRepository.save(str);
-//                menuItemRepository.save(drinks);
-//                menuItemRepository.save(coffee);
+                MenuItem str = new MenuItem("Strawberry danish", "pastry with strawberry jam", 5.3);
+                MenuItem drinks  = new MenuItem("Drink", "Cola, Fanta, Srite", 3.2);
+                MenuItem coffee = new MenuItem("Coffee", "coffee with milk", 4.0);
+
+                menuItemRepository.save(str);
+                menuItemRepository.save(drinks);
+                menuItemRepository.save(coffee);
 
 
             }
