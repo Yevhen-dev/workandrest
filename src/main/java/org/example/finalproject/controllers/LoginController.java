@@ -9,7 +9,7 @@ public class LoginController {
 
     @GetMapping("/")
     public String loginPage() {
-        return "/index";
+        return "index";
     }
 
 
