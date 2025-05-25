@@ -61,7 +61,7 @@ public class AdminController {
 
     @GetMapping("/addUser" )
     public String addUserPage(@AuthenticationPrincipal User user, Model model) {
-        return "/addUser";
+        return "addUser";
     }
 
     @PostMapping("/addUser")
