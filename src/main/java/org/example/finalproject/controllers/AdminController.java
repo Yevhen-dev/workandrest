@@ -56,7 +56,7 @@ public class AdminController {
 
         model.addAttribute("activeShift", isShiftActive);
         model.addAttribute("shifts", shifts);
-        return "/adminDashboard";
+        return "adminDashboard";
     }
 
     @GetMapping("/addUser" )
