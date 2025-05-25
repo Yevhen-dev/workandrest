@@ -73,7 +73,7 @@ public class AdminController {
     @GetMapping("/allShifts")
     public String allShiftsPage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("allShifts", workSessionService.getAllUsersSessions());
-        return "/allShifts";
+        return "allShifts";
     }
 
     @GetMapping( "/editShift" )
