@@ -28,7 +28,7 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("activeShift", isShiftActive);
         model.addAttribute("shifts", workSessionService.getUserSessions(user.getEmail()));
-        return "/userDashboard";
+        return "userDashboard";
     }
 
     @PostMapping("/userDashboard/start")
